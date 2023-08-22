@@ -11,8 +11,6 @@ import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'fire
 
 import { onGoogleButtonPress } from './modules/login';
 
-import { onGoogleButtonPress } from './modules/login';
-
 import {addDoc, doc, setDoc} from "firebase/firestore"
 type RootStackParamList = {
   SignUp: undefined;
