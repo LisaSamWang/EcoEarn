@@ -9,6 +9,8 @@ import {
 import { auth } from './firebaseConfig';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
 
+import { onGoogleButtonPress } from './modules/login';
+
 type RootStackParamList = {
   SignUp: undefined;
   SignIn: undefined;
@@ -59,6 +61,10 @@ export function SignInScreen({ navigation }: { navigation: AuthScreenNavigationP
 
   return (
     <View>
+    <Button
+      title="Google Sign-In"
+      onPress={() => onGoogleButtonPress().then(() => console.log('Signed in with Google!'))}
+    />
       <TextInput placeholder="Email" onChangeText={text => setEmail(text)} />
       <TextInput placeholder="Password" onChangeText={text => setPassword(text)} secureTextEntry />
       <Button title="Sign In" onPress={signIn} />
