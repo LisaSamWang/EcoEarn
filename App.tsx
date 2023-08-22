@@ -1,6 +1,10 @@
+const initialRoute = auth.currentUser ? "BottomTabNavigator" : "SignIn";
+// const initialRoute = auth.currentUser ? "SignIn" : "BottomTabNavigator";
+
 
 import React, { useState, PropsWithChildren } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
+import { auth } from './firebaseConfig';
 import { createStackNavigator } from '@react-navigation/stack';
 import {
   SafeAreaView,
@@ -12,6 +16,11 @@ import {
   View,
 } from 'react-native';
 import { SignUpScreen, SignInScreen } from './AuthScreens';
+
+import { JobsBoardScreen } from './JobsBoard';
+import { PostJobScreen } from './PostJob';
+import { UserProfileScreen } from './UserProfile';
+
 import {
   Colors,
   DebugInstructions,
@@ -20,13 +29,29 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
+
 type RootStackParamList = {
-  SignUp: undefined;
   SignIn: undefined;
-  Home: undefined;
+  SignUp: undefined;
+  BottomTabNavigator: undefined;
+  PostJob: undefined;
 };
 
+
 const Stack = createStackNavigator<RootStackParamList>();
+
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+const Tab = createBottomTabNavigator();
+
+function BottomTabNavigator() {
+  return (
+    <Tab.Navigator initialRouteName="JobsBoard">
+      <Tab.Screen name="JobsBoard" component={JobsBoardScreen} options={{ title: 'Jobs Board' }} />
+      <Tab.Screen name="UserProfile" component={UserProfileScreen} options={{ title: 'User Profile' }} />
+    </Tab.Navigator>
+  );
+}
+
 
 type SectionProps = PropsWithChildren<{
   title: string;
@@ -120,11 +145,14 @@ const styles = StyleSheet.create({
 export default function App(): JSX.Element {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="SignUp">
-        <Stack.Screen name="SignUp" component={SignUpScreen} />
-        <Stack.Screen name="SignIn" component={SignInScreen} />
-        <Stack.Screen name="Home" component={HomeScreen} />
-      </Stack.Navigator>
+
+<Stack.Navigator initialRouteName={initialRoute}>
+  <Stack.Screen name="SignIn" component={SignInScreen} options={{ title: 'Sign In' }} />
+  <Stack.Screen name="SignUp" component={SignUpScreen} options={{ title: 'Sign Up' }} />
+  <Stack.Screen name="BottomTabNavigator" component={BottomTabNavigator} options={{ headerShown: false }} />
+  <Stack.Screen name="PostJob" component={PostJobScreen} options={{ title: 'Post a Job' }} />
+</Stack.Navigator>
+
     </NavigationContainer>
   );
 }
@@ -160,15 +188,19 @@ export default function App(): JSX.Element {
 
 
 
-// /**
-//  * Sample React Native App
-//  * https://github.com/facebook/react-native
-//  *
-//  * @format
-//  */
 
-// import React from 'react';
-// import type {PropsWithChildren} from 'react';
+
+
+
+
+
+
+
+
+
+// import React, { useState, PropsWithChildren } from 'react';
+// import { NavigationContainer } from '@react-navigation/native';
+// import { createStackNavigator } from '@react-navigation/stack';
 // import {
 //   SafeAreaView,
 //   ScrollView,
@@ -178,7 +210,7 @@ export default function App(): JSX.Element {
 //   useColorScheme,
 //   View,
 // } from 'react-native';
-
+// import { SignUpScreen, SignInScreen } from './AuthScreens';
 // import {
 //   Colors,
 //   DebugInstructions,
@@ -187,11 +219,19 @@ export default function App(): JSX.Element {
 //   ReloadInstructions,
 // } from 'react-native/Libraries/NewAppScreen';
 
+// type RootStackParamList = {
+//   SignUp: undefined;
+//   SignIn: undefined;
+//   Home: undefined;
+// };
+
+// const Stack = createStackNavigator<RootStackParamList>();
+
 // type SectionProps = PropsWithChildren<{
 //   title: string;
 // }>;
 
-// function Section({children, title}: SectionProps): JSX.Element {
+// function Section({ children, title }: SectionProps): JSX.Element {
 //   const isDarkMode = useColorScheme() === 'dark';
 //   return (
 //     <View style={styles.sectionContainer}>
@@ -217,9 +257,8 @@ export default function App(): JSX.Element {
 //   );
 // }
 
-// function App(): JSX.Element {
+// function HomeScreen(): JSX.Element {
 //   const isDarkMode = useColorScheme() === 'dark';
-
 //   const backgroundStyle = {
 //     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
 //   };
@@ -277,4 +316,33 @@ export default function App(): JSX.Element {
 //   },
 // });
 
-// export default App;
+// export default function App(): JSX.Element {
+//   return (
+//     <NavigationContainer>
+//       <Stack.Navigator initialRouteName="SignUp">
+//         <Stack.Screen name="SignUp" component={SignUpScreen} />
+//         <Stack.Screen name="SignIn" component={SignInScreen} />
+//         <Stack.Screen name="Home" component={HomeScreen} />
+//       </Stack.Navigator>
+//     </NavigationContainer>
+//   );
+// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
