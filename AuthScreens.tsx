@@ -37,6 +37,7 @@ export function SignUpScreen({ navigation }: { navigation: AuthScreenNavigationP
       <TextInput placeholder="Email" onChangeText={text => setEmail(text)} />
       <TextInput placeholder="Password" onChangeText={text => setPassword(text)} secureTextEntry />
       <Button title="Sign Up" onPress={signUp} />
+      <Button title="Already have an account? Sign In" onPress={() => navigation.navigate('SignIn')} />
     </View>
   );
 }
@@ -61,6 +62,7 @@ export function SignInScreen({ navigation }: { navigation: AuthScreenNavigationP
       <TextInput placeholder="Email" onChangeText={text => setEmail(text)} />
       <TextInput placeholder="Password" onChangeText={text => setPassword(text)} secureTextEntry />
       <Button title="Sign In" onPress={signIn} />
+      <Button title="Don't have an account? Sign Up" onPress={() => navigation.navigate('SignUp')} />
     </View>
   );
 }
