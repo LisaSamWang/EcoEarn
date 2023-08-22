@@ -6,11 +6,14 @@ import {
   Button,
   Alert
 } from 'react-native';
-import { auth } from './firebaseConfig';
+import { auth, firestore } from './firebaseConfig';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
 
 import { onGoogleButtonPress } from './modules/login';
 
+import { onGoogleButtonPress } from './modules/login';
+
+import {addDoc, doc, setDoc} from "firebase/firestore"
 type RootStackParamList = {
   SignUp: undefined;
   SignIn: undefined;
@@ -22,10 +25,17 @@ type AuthScreenNavigationProp = StackNavigationProp<RootStackParamList, 'SignUp'
 export function SignUpScreen({ navigation }: { navigation: AuthScreenNavigationProp }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [username, setUsername] = useState('');
+  const [mainAddress, setMainAddress] = useState('');
 
   const signUp = async () => {
     try {
       await createUserWithEmailAndPassword(auth, email, password);
+      // Use doc if you don't want automatic uid
+      await setDoc(doc(firestore, "users", email), {
+        username: username,
+        mainAddress: mainAddress,
+      });
       navigation.navigate('SignIn');
     } catch (error) {
       if (error instanceof Error) {
@@ -36,10 +46,13 @@ export function SignUpScreen({ navigation }: { navigation: AuthScreenNavigationP
 
   return (
     <View>
-      <TextInput placeholder="Email" onChangeText={text => setEmail(text)} />
+      <TextInput placeholder="Email" autoCapitalize='none' onChangeText={text => setEmail(text)} />
       <TextInput placeholder="Password" onChangeText={text => setPassword(text)} secureTextEntry />
+      <TextInput placeholder='User name' autoCapitalize='none' onChangeText={text => setUsername(text)}/>
+      <TextInput placeholder='Main Address' onChangeText={text => setMainAddress(text)} />
       <Button title="Sign Up" onPress={signUp} />
       <Button title="Already have an account? Sign In" onPress={() => navigation.navigate('SignIn')} />
+    
     </View>
   );
 }
