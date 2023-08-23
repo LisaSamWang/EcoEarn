@@ -62,7 +62,7 @@ export function SignInScreen({ navigation }: { navigation: AuthScreenNavigationP
   const signIn = async () => {
     try {
       await signInWithEmailAndPassword(auth, email, password).then((userCredentials) => {
-      navigation.navigate('Home');
+      navigation.navigate('BottomTabNavigator');
         },
       );
     } catch (error) {
@@ -80,7 +80,7 @@ export function SignInScreen({ navigation }: { navigation: AuthScreenNavigationP
           onGoogleButtonPress()
             .then(() => {
               console.log('Signed in with Google!');
-              navigation.navigate("Home");
+              navigation.navigate('BottomTabNavigator');
             })
             .catch(() => console.log('Error in signing in. Try again!'))
         }

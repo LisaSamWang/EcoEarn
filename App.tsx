@@ -34,7 +34,6 @@ type RootStackParamList = {
   SignIn: undefined;
   SignUp: undefined;
   BottomTabNavigator: undefined;
-  Hone: undefined;
   PostJob: undefined;
 };
 
@@ -153,7 +152,6 @@ export default function App(): JSX.Element {
     <NavigationContainer>
 
 <Stack.Navigator initialRouteName={initialRoute}>
-  <Stack.Screen name="Home" options={{headerBackTitleVisible: false}} component={HomeScreen} />
   <Stack.Screen name="SignIn" component={SignInScreen} options={{ title: 'Sign In'}} />
   <Stack.Screen name="SignUp" component={SignUpScreen} options={{ title: 'Sign Up' }} />
   <Stack.Screen name="BottomTabNavigator" component={BottomTabNavigator} options={{ headerShown: false }} />
