@@ -24,8 +24,8 @@ function BottomTabNavigator() {
   return (
     <Tab.Navigator initialRouteName="JobsBoard">
       <Tab.Screen name="JobsBoard" component={JobsBoardScreen} options={{ title: 'Jobs Board' }} />
-      <Tab.Screen name="UserProfile" component={UserProfileScreen} options={{ title: 'User Profile' }} />
       <Tab.Screen name="PostJob" component={PostJobScreen} options={{ title: 'Post Job' }} />
+      <Tab.Screen name="UserProfile" component={UserProfileScreen} options={{ title: 'User Profile' }} />
     </Tab.Navigator>
   );
 }
