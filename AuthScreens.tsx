@@ -74,7 +74,7 @@ export function SignInScreen({ navigation }: { navigation: AuthScreenNavigationP
     <View>
     <Button
       title="Google Sign-In"
-      onPress={() => onGoogleButtonPress().then(() => console.log('Signed in with Google!'))}
+      onPress={() => onGoogleButtonPress().then(() => console.log('Signed in with Google!')).catch(() => console.log('Error in signing in. Try again!'))}
     />
       <TextInput placeholder="Email" onChangeText={text => setEmail(text)} />
       <TextInput placeholder="Password" onChangeText={text => setPassword(text)} secureTextEntry />
