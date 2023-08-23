@@ -1,10 +1,5 @@
-// const initialRoute = auth.currentUser ? "BottomTabNavigator" : "SignIn";
-// const initialRoute = auth.currentUser ? "SignIn" : "BottomTabNavigator";
-
-
 import React, { useState, PropsWithChildren, useEffect } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-// import { auth } from './firebaseConfig';'
 import auth from '@react-native-firebase/auth';
 
 import { createStackNavigator } from '@react-navigation/stack';
