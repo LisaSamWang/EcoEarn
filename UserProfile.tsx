@@ -84,18 +84,22 @@ const signOut = async () => {
 
   return (
     <View style={{ flex: 1, padding: 20 }}>
-      <Text>Name: {name}</Text>
+      <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+      <Text>Name: </Text>
       <TextInput
         placeholder="Name"
         value={name}
         onChangeText={setName}
       />
-      <Text>Address: {address}</Text>
+      </View>
+      <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+      <Text>Address: </Text>
       <TextInput
         placeholder="Address"
         value={address}
         onChangeText={setAddress}
       />
+      </View>
       <Text>Email: {email}</Text>
       <Text>Points: {points}</Text>
       <Button title="Save Profile" onPress={saveUserProfile} />

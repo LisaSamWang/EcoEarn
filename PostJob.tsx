@@ -95,21 +95,30 @@ useEffect(() => {
 
   return (
     <View style={{ flex: 1, padding: 20 }}>
+      <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+      <Text>Username: </Text>
       <TextInput 
         placeholder="Username"
         value={userDetails.username}
         editable={false}
       />
+      </View>
+      <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+      <Text>Full Address: </Text>
       <TextInput 
         placeholder="Full Address" 
         value={userDetails.address}
         onChangeText={(text) => setUserDetails({ ...userDetails, address: text })}
       />
+      </View>
+      <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+      <Text>Number of Items: </Text>
       <TextInput 
         placeholder="Items to pick up" keyboardType="numeric" 
         value={itemsCount}
         onChangeText={setItemsCount}
       />
+      </View>
       <Button title="Post Job" onPress={postJob} />
     </View>
   );
