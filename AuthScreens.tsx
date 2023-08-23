@@ -4,7 +4,7 @@ import {
   View,
   TextInput,
   Button,
-  Alert
+  Alert,
 } from 'react-native';
 import { auth, firestore } from './firebaseConfig';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
@@ -61,8 +61,10 @@ export function SignInScreen({ navigation }: { navigation: AuthScreenNavigationP
 
   const signIn = async () => {
     try {
-      await signInWithEmailAndPassword(auth, email, password);
+      await signInWithEmailAndPassword(auth, email, password).then((userCredentials) => {
       navigation.navigate('Home');
+        },
+      );
     } catch (error) {
       if (error instanceof Error) {
         Alert.alert('Error', error.message);
@@ -74,7 +76,14 @@ export function SignInScreen({ navigation }: { navigation: AuthScreenNavigationP
     <View>
     <Button
       title="Google Sign-In"
-      onPress={() => onGoogleButtonPress().then(() => console.log('Signed in with Google!')).catch(() => console.log('Error in signing in. Try again!'))}
+        onPress={() =>
+          onGoogleButtonPress()
+            .then(() => {
+              console.log('Signed in with Google!');
+              navigation.navigate("Home");
+            })
+            .catch(() => console.log('Error in signing in. Try again!'))
+        }
     />
       <TextInput placeholder="Email" onChangeText={text => setEmail(text)} />
       <TextInput placeholder="Password" onChangeText={text => setPassword(text)} secureTextEntry />

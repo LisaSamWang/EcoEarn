@@ -34,6 +34,7 @@ type RootStackParamList = {
   SignIn: undefined;
   SignUp: undefined;
   BottomTabNavigator: undefined;
+  Hone: undefined;
   PostJob: undefined;
 };
 
@@ -122,7 +123,12 @@ function HomeScreen(): JSX.Element {
     </SafeAreaView>
   );
 }
-
+HomeScreen.navigationOptions = {
+  headerTitle: ' Screen',
+  headerLeft: () => {
+    return null;
+  },
+};
 const styles = StyleSheet.create({
   sectionContainer: {
     marginTop: 32,
@@ -147,10 +153,12 @@ export default function App(): JSX.Element {
     <NavigationContainer>
 
 <Stack.Navigator initialRouteName={initialRoute}>
-  <Stack.Screen name="SignIn" component={SignInScreen} options={{ title: 'Sign In' }} />
+  <Stack.Screen name="Home" options={{headerBackTitleVisible: false}} component={HomeScreen} />
+  <Stack.Screen name="SignIn" component={SignInScreen} options={{ title: 'Sign In'}} />
   <Stack.Screen name="SignUp" component={SignUpScreen} options={{ title: 'Sign Up' }} />
   <Stack.Screen name="BottomTabNavigator" component={BottomTabNavigator} options={{ headerShown: false }} />
   <Stack.Screen name="PostJob" component={PostJobScreen} options={{ title: 'Post a Job' }} />
+
 </Stack.Navigator>
 
     </NavigationContainer>
