@@ -38,30 +38,3 @@ export async function onGoogleButtonPress() {
     // For existing users with complete profiles, navigate to JobsBoard screen
     return "JobsBoard";
 }
-
-
-
-
-
-
-
-
-
-// import auth from '@react-native-firebase/auth'
-// import { GoogleSignin } from '@react-native-google-signin/google-signin'
-// GoogleSignin.configure({
-//   webClientId: '42057584434-gb1uivcbiqr16ev5f95grbdd2rabstuv.apps.googleusercontent.com'
-// })
-
-// export async function onGoogleButtonPress () {
-//     // Check if your device supports Google Play
-//     await GoogleSignin.hasPlayServices({ showPlayServicesUpdateDialog: true })
-//     // Get the users ID token
-//     const { idToken } = await GoogleSignin.signIn()
-  
-//     // Create a Google credential with the token
-//     const googleCredential = auth.GoogleAuthProvider.credential(idToken)
-  
-//     // Sign-in the user with the credential
-//     return auth().signInWithCredential(googleCredential)
-//   }
