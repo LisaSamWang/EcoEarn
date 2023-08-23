@@ -55,7 +55,10 @@ export function SignUpScreen({ navigation }: { navigation: AuthScreenNavigationP
   );
 }
 
-export function SignInScreen({ navigation }: { navigation: AuthScreenNavigationProp }) {
+export function SignInScreen({ navigation, route }: { navigation: AuthScreenNavigationProp }) {
+  if (route.params?.user) {
+    navigation.navigate('BottomTabNavigator', route.params);
+  }
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -78,9 +81,10 @@ export function SignInScreen({ navigation }: { navigation: AuthScreenNavigationP
       title="Google Sign-In"
         onPress={() =>
           onGoogleButtonPress()
-            .then(() => {
+            .then((user) => {
+              console.log(user);
               console.log('Signed in with Google!');
-              navigation.navigate('BottomTabNavigator');
+              navigation.navigate('BottomTabNavigator', {name: user.additionalUserInfo});
             })
             .catch(() => console.log('Error in signing in. Try again!'))
         }

@@ -1,10 +1,12 @@
-const initialRoute = auth.currentUser ? "BottomTabNavigator" : "SignIn";
+// const initialRoute = auth.currentUser ? "BottomTabNavigator" : "SignIn";
 // const initialRoute = auth.currentUser ? "SignIn" : "BottomTabNavigator";
 
 
-import React, { useState, PropsWithChildren } from 'react';
+import React, { useState, PropsWithChildren, useEffect } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import { auth } from './firebaseConfig';
+// import { auth } from './firebaseConfig';'
+import auth from '@react-native-firebase/auth';
+
 import { createStackNavigator } from '@react-navigation/stack';
 import {
   SafeAreaView,
@@ -43,7 +45,8 @@ const Stack = createStackNavigator<RootStackParamList>();
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 const Tab = createBottomTabNavigator();
 
-function BottomTabNavigator() {
+function BottomTabNavigator({ navigation, route }) {
+  console.log(route.params);
   return (
     <Tab.Navigator initialRouteName="JobsBoard">
       <Tab.Screen name="JobsBoard" component={JobsBoardScreen} options={{ title: 'Jobs Board' }} />
@@ -148,11 +151,22 @@ const styles = StyleSheet.create({
 });
 
 export default function App(): JSX.Element {
+  const [initializing, setInitializing] = useState(true);
+  const [user, setUser] = useState();
+  function onAuthStateChanged(user) {
+    setUser(user);
+    if (initializing) setInitializing(false);
+  }
+  useEffect(() => {
+    const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
+    return subscriber; // unsubscribe on unmount
+  }, []);
+  if (initializing) return null;
   return (
     <NavigationContainer>
 
-<Stack.Navigator initialRouteName={initialRoute}>
-  <Stack.Screen name="SignIn" component={SignInScreen} options={{ title: 'Sign In'}} />
+<Stack.Navigator initialRouteName={"SignIn"}>
+  <Stack.Screen name="SignIn" component={SignInScreen} options={{ title: 'Sign In'}} initialParams={{user}} />
   <Stack.Screen name="SignUp" component={SignUpScreen} options={{ title: 'Sign Up' }} />
   <Stack.Screen name="BottomTabNavigator" component={BottomTabNavigator} options={{ headerShown: false }} />
   <Stack.Screen name="PostJob" component={PostJobScreen} options={{ title: 'Post a Job' }} />
