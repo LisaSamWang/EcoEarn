@@ -39,10 +39,20 @@ export function UserProfileScreen({ navigation }: any) {
     }
   };
 
-  const signOut = async () => {
-    await GoogleSignin.signOut();
-    navigation.navigate('SignIn');
-  };
+  
+const signOut = async () => {
+    try {
+        await GoogleSignin.signOut();
+        navigation.reset({
+            index: 0,
+            routes: [{ name: 'SignIn' }],
+        });
+    } catch (error) {
+        console.error("Error signing out:", error);
+        Alert.alert("Error", "There was an issue signing out. Please try again.");
+    }
+};
+
 
   useEffect(() => {
     let unsubscribe: any;
