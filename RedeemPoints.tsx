@@ -70,13 +70,13 @@ useFocusEffect(
 
     return (
         <View style={{ flex: 1, padding: 20 }}>
-            <Text>Redeem Points</Text>
-            <Text>Available Points: {userPoints}</Text>
+            <Text style={{color: 'black'}}>Redeem Points</Text>
+            <Text style={{color: 'black'}}>Available Points: {userPoints}</Text>
             
 
 <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-    <Text>Points to redeem: </Text>
-    <TextInput
+    <Text style={{color: 'black'}}>Points to redeem: </Text>
+    <TextInput style={{color: 'black'}}
         placeholder="0"
         keyboardType="numeric"
         onChangeText={text => {

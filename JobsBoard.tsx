@@ -97,13 +97,13 @@ export function JobsBoardScreen({ navigation }: { navigation: any }) {
       <FlatList
         data={jobs}
         renderItem={({ item }) => (
-          <View style={{ marginVertical: 10, padding: 10, borderColor: 'gray', borderWidth: 1 }}>
-            <Text>User: {item.jobPoster}</Text>
-            <Text>Address: {item.address}</Text>
-            <Text>Items to pick up: {item.numItems}</Text>
+          <View style={{ marginVertical: 10, padding: 10, borderColor: 'gray', borderWidth: 1}}>
+            <Text style={{color: 'black'}}>User: {item.jobPoster}</Text>
+            <Text style={{color: 'black'}}>Address: {item.address}</Text>
+            <Text style={{color: 'black'}}>Items to pick up: {item.numItems}</Text>
             
             {item.completed ? 
-              <Text>Job Completed</Text> :
+              <Text style={{color: 'black'}}>Job Completed</Text> :
               item.jobClaimer ? 
               item.jobClaimerEmail === currentUserEmail ? 
               <Button title="Completed" onPress={() => {
@@ -111,7 +111,7 @@ export function JobsBoardScreen({ navigation }: { navigation: any }) {
                   completeJob(item.id, item.jobPosterEmail, item.numItems);
                 }
               }} /> :
-              <Text>Claimed by: {item.jobClaimer}</Text> : 
+              <Text style={{color: 'black'}}>Claimed by: {item.jobClaimer}</Text> : 
               <Button title="Claim Job" onPress={() => claimJob(item.id)} />
             }
           </View>

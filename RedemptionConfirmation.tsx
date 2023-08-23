@@ -22,7 +22,7 @@ if (type === 'cash') {
 
     return (
         <View>
-            <Text>{confirmationMessage}</Text>
+            <Text style={{color: 'black'}}>{confirmationMessage}</Text>
             <Button title="Done" onPress={() => navigation.navigate('RedeemPoints')} />
         </View>
     );
