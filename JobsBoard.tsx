@@ -106,42 +106,41 @@ export function JobsBoardScreen({ navigation }: { navigation: any }) {
       <FlatList
         data={jobs}
         renderItem={({ item }) => (
-          <View style={{ marginVertical: 10, padding: 10, borderColor: 'forestgreen', borderWidth: 1 }}>
-            <Text style={{ color: 'black' }}>
-              <Text style={{ fontWeight: 'bold' }}>
-                User:</Text> {item.jobPoster}
-            </Text>
-            <Text style={{ color: 'black' }}>
-              <Text style={{ fontWeight: 'bold' }}>Address</Text>: {item.address}
-            </Text>
-            <Text style={{ color: 'black' }}>
-              <Text style={{ fontWeight: 'bold' }}>Items to pick up</Text>: {item.numItems}
-            </Text>
+<View style={{ marginVertical: 10, padding: 10, borderColor: 'forestgreen', borderWidth: 1 }}>
+  <Text style={{ color: 'black' }}>
+    <Text style={{ fontWeight: 'bold' }}>User:</Text> {item.jobPoster}
+  </Text>
+  <Text style={{ color: 'black' }}>
+    <Text style={{ fontWeight: 'bold' }}>Address</Text>: {item.address}
+  </Text>
+  <Text style={{ color: 'black' }}>
+    <Text style={{ fontWeight: 'bold' }}>Items to pick up</Text>: {item.numItems}
+  </Text>
 
-            {item.jobClaimerEmail === currentUserEmail ?
-              <Button title="Cancel" onPress={() => {
-                if (item.id && item.jobPosterEmail && item.numItems !== undefined) {
-                  cancelJob(item.id, item.jobPosterEmail, item.numItems);
-                }
-              }} /> :
-              <Text style={{ color: 'black' }}>Claimed by: {item.jobClaimer}</Text>
-            }
+  {item.completed && <Text style={{ color: 'black' }}>Job Completed</Text>}
 
-            {item.completed ?
-              <Text style={{ color: 'black' }}>Job Completed</Text> :
-              item.jobClaimer ?
-                item.jobClaimerEmail === currentUserEmail ?
-                  <Button title="Completed" onPress={() => {
-                    if (item.id && item.jobPosterEmail && item.numItems !== undefined) {
-                      completeJob(item.id, item.jobPosterEmail, item.numItems);
-                    }
-                  }} />
-                  :
-                  <Text style={{ color: 'black' }}>Claimed by: {item.jobClaimer}</Text> :
-                <Button title="Claim Job" onPress={() => claimJob(item.id)} />
+  {!item.completed && item.jobClaimerEmail === currentUserEmail && <>
+    <Button title="Cancel" onPress={() => {
+      if (item.id && item.jobPosterEmail && item.numItems !== undefined) {
+        cancelJob(item.id, item.jobPosterEmail, item.numItems);
+      }
+    }} />
+    <Button title="Completed" onPress={() => {
+      if (item.id && item.jobPosterEmail && item.numItems !== undefined) {
+        completeJob(item.id, item.jobPosterEmail, item.numItems);
+      }
+    }} />
+  </>}
 
-            }
-          </View>
+  {!item.completed && !item.jobClaimer &&
+    <Button title="Claim Job" onPress={() => claimJob(item.id)} />
+  }
+
+  {!item.completed && item.jobClaimer && item.jobClaimerEmail !== currentUserEmail && 
+    <Text style={{ color: 'black' }}>Claimed by: {item.jobClaimer}</Text>
+  }
+</View>
+
         )
         }
         keyExtractor={item => item.id}
@@ -149,15 +148,3 @@ export function JobsBoardScreen({ navigation }: { navigation: any }) {
     </View >
   );
 }
-
-
-// {
-//   item.jobClaimer ? 
-//   <Text style={{color: 'black'}}>Job In Progress</Text> : 
-//   item.jobClaimerEmail === currentUserEmail ? 
-//   <Button title="Cancel" onPress={() => {
-//     if (item.id && item.jobPosterEmail && item.numItems !== undefined) {
-//       cancelJob(item.id, item.jobPosterEmail, item.numItems);
-//     }
-//   }} /> 
-// } : 
