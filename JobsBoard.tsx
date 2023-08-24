@@ -106,10 +106,17 @@ export function JobsBoardScreen({ navigation }: { navigation: any }) {
       <FlatList
         data={jobs}
         renderItem={({ item }) => (
-          <View style={{ marginVertical: 10, padding: 10, borderColor: 'gray', borderWidth: 1 }}>
-            <Text style={{ color: 'black' }}>User: {item.jobPoster}</Text>
-            <Text style={{ color: 'black' }}>Address: {item.address}</Text>
-            <Text style={{ color: 'black' }}>Items to pick up: {item.numItems}</Text>
+          <View style={{ marginVertical: 10, padding: 10, borderColor: 'forestgreen', borderWidth: 1 }}>
+            <Text style={{ color: 'black' }}>
+              <Text style={{ fontWeight: 'bold' }}>
+                User:</Text> {item.jobPoster}
+            </Text>
+            <Text style={{ color: 'black' }}>
+              <Text style={{ fontWeight: 'bold' }}>Address</Text>: {item.address}
+            </Text>
+            <Text style={{ color: 'black' }}>
+              <Text style={{ fontWeight: 'bold' }}>Items to pick up</Text>: {item.numItems}
+            </Text>
 
             {item.jobClaimerEmail === currentUserEmail ?
               <Button title="Cancel" onPress={() => {
