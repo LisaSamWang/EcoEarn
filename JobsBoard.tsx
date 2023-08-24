@@ -92,6 +92,15 @@ export function JobsBoardScreen({ navigation }: { navigation: any }) {
     await posterDocRef.update({ points: firebase.firestore.FieldValue.increment(numItems) });
   };
 
+  // Cancelling job, reverting "in progress" status
+  const cancelJob = async (jobId: string, jobPoster: string, numItems: number) => {
+    if (!currentUserEmail || !numItems) return;
+
+        // Update the job's status to "open"
+        const jobDocRef = db.collection('jobs').doc(jobId);
+        await jobDocRef.update({ jobClaimer: null, jobClaimerEmail: null, completed: false });     
+  }
+
   return (
     <View style={{ flex: 1, padding: 20 }}>
       <FlatList
@@ -102,6 +111,15 @@ export function JobsBoardScreen({ navigation }: { navigation: any }) {
             <Text style={{color: 'black'}}>Address: {item.address}</Text>
             <Text style={{color: 'black'}}>Items to pick up: {item.numItems}</Text>
             
+            {item.jobClaimerEmail === currentUserEmail ? 
+              <Button title="Cancel" onPress={() => {
+                if (item.id && item.jobPosterEmail && item.numItems !== undefined) {
+                  cancelJob(item.id, item.jobPosterEmail, item.numItems);
+                }
+              }} />  : 
+              <Text style={{color: 'black'}}>Claimed by: {item.jobClaimer}</Text> 
+            }
+
             {item.completed ? 
               <Text style={{color: 'black'}}>Job Completed</Text> :
               item.jobClaimer ? 
@@ -110,9 +128,11 @@ export function JobsBoardScreen({ navigation }: { navigation: any }) {
                 if (item.id && item.jobPosterEmail && item.numItems !== undefined) {
                   completeJob(item.id, item.jobPosterEmail, item.numItems);
                 }
-              }} /> :
+              }} /> 
+              :
               <Text style={{color: 'black'}}>Claimed by: {item.jobClaimer}</Text> : 
               <Button title="Claim Job" onPress={() => claimJob(item.id)} />
+              
             }
           </View>
         )}
@@ -123,3 +143,13 @@ export function JobsBoardScreen({ navigation }: { navigation: any }) {
 }
 
 
+// {
+//   item.jobClaimer ? 
+//   <Text style={{color: 'black'}}>Job In Progress</Text> : 
+//   item.jobClaimerEmail === currentUserEmail ? 
+//   <Button title="Cancel" onPress={() => {
+//     if (item.id && item.jobPosterEmail && item.numItems !== undefined) {
+//       cancelJob(item.id, item.jobPosterEmail, item.numItems);
+//     }
+//   }} /> 
+// } : 
