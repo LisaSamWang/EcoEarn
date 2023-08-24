@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import { View, Text, Button, FlatList, Alert } from 'react-native';
+import { View, Text, Button, FlatList, Alert, ImageBackground } from 'react-native';
 import { db } from './firebaseConfig';
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
 import { firebase } from '@react-native-firebase/firestore';
@@ -102,10 +102,12 @@ export function JobsBoardScreen({ navigation }: { navigation: any }) {
   }
 
   return (
+    
     <View style={{ flex: 1, padding: 20 }}>
       <FlatList
         data={jobs}
         renderItem={({ item }) => (
+          
 <View style={{ marginVertical: 10, padding: 10, borderColor: 'forestgreen', borderWidth: 1 }}>
   <Text style={{ color: 'black' }}>
     <Text style={{ fontWeight: 'bold' }}>User:</Text> {item.jobPoster}

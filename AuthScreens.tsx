@@ -5,6 +5,7 @@ import {
   View,
   Button,
   Alert,
+  ImageBackground
 } from 'react-native';
 import { onGoogleButtonPress } from './modules/login';
 
@@ -20,6 +21,7 @@ export function SignUpScreen({ navigation }: { navigation: AuthScreenNavigationP
 
   return (
     <View>
+      <ImageBackground source={require("./EcoEarn-logos.jpeg")} style={{ flex: 1 }}></ImageBackground>
       <Button
         title="Google Sign-Up"
         onPress={async () => {
@@ -42,6 +44,7 @@ export function SignUpScreen({ navigation }: { navigation: AuthScreenNavigationP
         }}
       />
       <Button title="Already have an account? Sign In" onPress={() => navigation.navigate('SignIn')} />
+      <ImageBackground source={require("./EcoEarn-logos.jpeg")} style={{ flex: 1 }}></ImageBackground>
     </View>
   );
 }
@@ -49,6 +52,7 @@ export function SignUpScreen({ navigation }: { navigation: AuthScreenNavigationP
 export function SignInScreen({ navigation }: { navigation: AuthScreenNavigationProp }) {
   return (
     <View>
+      <ImageBackground source={require("./EcoEarn-logos.jpeg")} style={{ flex: 1 }}></ImageBackground>
       <Button
         title="Google Sign-In"
         onPress={async () => {
@@ -71,6 +75,7 @@ export function SignInScreen({ navigation }: { navigation: AuthScreenNavigationP
         }}
       />
       <Button title="Don't have an account? Sign Up" onPress={() => navigation.navigate('SignUp')} />
+      <ImageBackground source={require("./EcoEarn-logos.jpeg")} style={{ flex: 1 }}></ImageBackground>
     </View>
   );
 }

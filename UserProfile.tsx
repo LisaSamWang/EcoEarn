@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TextInput, Button, Alert } from 'react-native';
+import { View, Text, TextInput, Button, Alert, ImageBackground } from 'react-native';
 import { db } from './firebaseConfig';
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
 
@@ -84,6 +84,7 @@ const signOut = async () => {
 
   return (
     <View style={{ flex: 1, padding: 20 }}>
+      <ImageBackground source={require("./EcoEarn-logos.jpeg")} style={{ flex: 1 }}></ImageBackground>
       <View style={{ flexDirection: 'row', alignItems: 'center' }}>
       <Text style={{color: 'black'}}>Name: </Text>
       <TextInput

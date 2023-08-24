@@ -13,7 +13,7 @@ import { UserProfileScreen } from './UserProfile';
 import { PostJobScreen } from './PostJob';
 import { RedeemPointsScreen } from './RedeemPoints';
 import { RedemptionConfirmationScreen } from './RedemptionConfirmation';
-import { Image } from 'react-native';
+import { Image, ImageBackground } from 'react-native';
 type RootStackParamList = {
   SignIn: undefined;
   SignUp: undefined;
@@ -87,7 +87,8 @@ function BottomTabNavigator() {
 }
 export default function App(): JSX.Element {
   return (
-    <NavigationContainer>
+    <ImageBackground source={require("./EcoEarn-logos.jpeg")} style={{ flex: 1 }}>
+      <NavigationContainer>
       <Stack.Navigator initialRouteName="SignUp">
         <Stack.Screen name="SignUp" component={SignUpScreen} />
         <Stack.Screen name="SignIn" component={SignInScreen} />
@@ -99,6 +100,7 @@ export default function App(): JSX.Element {
         />
       </Stack.Navigator>
     </NavigationContainer>
+    </ImageBackground>
   );
 }
 
