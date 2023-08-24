@@ -32,7 +32,7 @@ export function JobsBoardScreen({ navigation }: { navigation: any }) {
 
   useEffect(() => {
     // Fetch all jobs from Firestore
-    const jobsCollectionRef = db.collection('jobs');
+    const jobsCollectionRef = db.collection('jobs').where("completed", "==", false);
     const unsubscribe = jobsCollectionRef.onSnapshot(snapshot => {
       const fetchedJobs = snapshot.docs.map(doc => ({ ...doc.data(), id: doc.id }));
       setJobs(fetchedJobs);
